@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/buy.css">
+    <title>Покупка</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script src="/static/js/buy.js"></script>
+    <div id="outer">
+        <div id="inner">
+            <div class="container" id="block-card">
+            <div style="display: inline;">
+            <p class="card_number" style="display: inline-block;" id="image-card">0000000000000000</p>
+            <p class="card_number" style="display: inline-block; font-size: 20px; padding-left: 20px;" id="op-card">NONE</p>
+            </div>
+            <div style="display: inline; padding-left: 50px;">
+            <p class="p">{{ card_ns }}</p>
+            <p class="p" id="date-card">00/00</p>
+            <p class="p" id="image-cvv">000</p>
+            </div>
+            </div>
+            <br><br>
+            <div style="display: inline;">
+                <input type="checkbox" value="" id="check" onclick="
+                    if (document.getElementById('check').checked){
+                        document.getElementById('block-card').setAttribute('style', 'filter: blur(10px)');
+                    }
+                    else{
+                        document.getElementById('block-card').setAttribute('style', 'filter: none');
+                    }">
+                <label style="color: white;">Скрыть реквизиты</label><br><br>
+                <a style="text-decoration: none;" href="/view?id={{ pizza.id }}&red_from=buy?id={{ pizza.id }}"><h1 style="color: white;">{{ pizza.name }} - {{ pizza.price }} ₽</h1></a>
+                <form method="post">
+            <input required type="text" placeholder="Номер карты" class="input-card-number" maxlength="16" id="card" min="0" onchange="changeCard()" >
+            <input required type="text" placeholder="CVV" class="input-card-number" maxlength="3" min="0" id="cvv" style="width: 17%;" onchange="changeCVV()"><br><br>
+            <select required class="input-card-select" onchange="
+            var mounth = document.getElementById('mounth');
+            var year = document.getElementById('year');
+            document.getElementById('date-card').innerHTML = mounth.value + '/' + year.value.substring(2, 4);
+            " id="mounth">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select required class="input-card-select" onchange="
+            var mounth = document.getElementById('mounth');
+            var year = document.getElementById('year');
+            document.getElementById('date-card').innerHTML = mounth.value + '/' + year.value.substring(2, 4);
+            " id="year">
+                {% for i in years %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select><br><br>
+                    <input type="text" placeholder="Адрес" class="input-card-number" style="width: 100%;" name="pizza_address"><br><br>
+            <button type="submit" class="button-buy">КУПИТЬ</button><br><br>
+            </form>
+        </div><br><br>
+
+        </div>
+    </div>
+
+</body>
+</html>

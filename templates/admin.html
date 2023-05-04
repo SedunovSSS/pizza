@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Админ</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <div id="outer">
+        <div id="inner">
+            <form method="get">
+                <input type="text" placeholder="Поиск" class="input-search" id="search" name="search">
+            <button class="btn-search" type="submit"><img class="icon-search" src="/static/images/search.png"></button>
+            </form>
+            <h1>Админ Панель</h1>
+            <button class="btn_" onclick="red_('/admin/add_pizza')">Добавить пиццу</button><button class="btn_" onclick="red_('/admin/orders')">Обработка заказов</button><button class="btn_" onclick="red_('/admin/all_users')">Все пользователи</button>
+        </div>
+        <div class="pizzas">
+      {% set len_ = pizzas|length %}
+            {% if len_ == 0 %}
+            <div style="text-align: center;">
+             <h1>Ничего не найдено</h1>
+            </div>
+            {% else %}
+            {% for i in range(len_) %}
+            <div style="display:inline">
+    <div style="width: 33%; float: left">
+        <div class="pizza">
+   <a href="/view?id={{ pizzas[i].id }}&red_from=admin"><img src="/{{ pizzas[i].path }}" class="img"></a>
+
+    <h1 >{{ pizzas[i].name }} - {{ pizzas[i].price }} ₽ </h1>
+
+    <button class="btn_" onclick="edit_pizza({{pizzas[i].id}})">&#9989; Редактировать</button><button class="btn_" onclick="del_pizza({{pizzas[i].id}})">❌ Удалить</button>
+        </div></div>
+</div>
+        </div>
+        {% if i + 1 % 3 == 0 %}
+        <br><br><br>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+</div>
+</body>
+</html>

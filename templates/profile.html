@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Профиль</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <div id="outer">
+        <div id="inner" style="border: 2px solid white;">
+            <div style="width: 80%; margin-left: auto; margin-right: auto; text-align: left">
+          <h1><img src="/static/images/user_profile.png" class="icon-login"> Логин: {{ user.login }}</h1>
+          <h1><img src="/static/images/email.png" class="icon-login"> Email: {{ user.email }}</h1>
+          <h1><img src="/static/images/name.png" class="icon-login"> Имя: {{ user.name }}</h1>
+          <h1><img src="/static/images/name.png" class="icon-login"> Фамилия: {{ user.surname }}</h1>
+          <h1><img src="/static/images/admin.png" class="icon-login"> Админ: {% if user.is_super_user %} Да {% else %} Нет {% endif %}</h1>
+                <button class="btn_" onclick="red_('/edit_profile')">&#9989; ИЗМЕНИТЬ</button><br><br>
+            </div>
+        </div>
+      <div style="text-align: center;
+        width: 600px; margin: 5% auto;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;">
+         <h1>Мои заказы</h1>
+          {% if orders == [] %}
+         <h1 id="orders">( Их нет )</h1>
+          {% else %}
+          {% for i in range(orders|length) %}
+          <div style="border: 4px solid white; border-radius: 20px;">
+              <img src="/{{ pizzas[i].path }}" class="order_img" >
+              <a style="text-decoration: none; color: white;" href="/view?id={{ pizzas[i].id }}&red_from=profile#pizza_{{ pizzas[i].id }}"><h1 id="pizza_{{ pizzas[i].id }}" >{{ pizzas[i].name }}</h1></a>
+              <h1>{{ orders[i].address }}</h1>
+              <div class="spinner"><span style="font-size: 30px;">{{ orders[i].status }} </span></div>
+
+          </div><br>
+          {% endfor %}
+          {% endif %}
+      </div>
+</div>
+</body>
+</html>

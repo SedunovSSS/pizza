@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <title>Изменить профиль</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/password.js"></script>
+{% include 'header.html' %}
+
+    <div id="outer">
+        <div id="inner-login">
+            <h1>Изменить профиль</h1>
+           <form method="post">
+               <div class="div_input"><img src="/static/images/email.png" class="icon-login"><input type="email" placeholder="Ваш Email" class="input" name="email" id="email" title="Мыло" value="{{ user.email }}"></div><br><br>
+            <div class="div_input"><img src="/static/images/name.png" class="icon-login"><input type="text" placeholder="Ваше Имя" class="input" name="name" id="name" title="Имя" value="{{ user.name }}"></div><br><br>
+            <div class="div_input"><img src="/static/images/name.png" class="icon-login"><input type="text" placeholder="Ваша Фамилия" class="input" name="surname" id="surname" title="Фамилия" value="{{ user.surname }}"></div><br><br>
+            <div class="div_input"><img src="/static/images/key.png" class="icon-login"><input type="password" placeholder="Ваш Пароль" class="input" id="passw1" name="passw1" title="Пароль"></div><br><br>
+            <label class="lbl"><input type="checkbox" class="check">Показать пароль</label><br><br>
+            <button type="submit" class="btn-login" title="Войти">ИЗМЕНИТЬ</button><br><br>
+           </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Все пользователи</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <div id="outer">
+        <div id="inner" style="color: white; width: 90%; text-align: center;">
+         <h1>Все пользователи</h1>
+            {% for i in users %}
+                <div class="user_in_admin">
+                    <h4 class="element">{{ i.login }}</h4>
+                    <h4 class="element">{{ i.email }}</h4>
+                    <h4 class="element">{{ i.name }}</h4>
+                    <h4 class="element">{{ i.surname }}</h4>
+
+                    {% if not i.is_super_user %}
+                    <button class="gimme-admin" onclick="red('/admin/gimme_admin?id={{i.id}}')">Выдать админку</button>
+                    <button class="steal-account" onclick="red('/admin/del_account?id={{i.id}}')">Удалить аккаунт</button>
+                    {% elif i.login == name %}
+                    <h4>Вы</h4>
+                    {% else %}
+                    <button class="steal-admin" onclick="red('/admin/steal_admin?id={{i.id}}')">Удалить из админов</button>
+                    <h3>Аккаунт Админа</h3>
+                    {% endif %}
+                </div><br>
+            {% endfor %}
+        </div>
+
+</div>
+</body>
+</html>

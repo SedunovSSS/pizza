@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <title>Редактировать</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/password.js"></script>
+{% include 'header.html' %}
+    <div id="outer">
+        <div id="inner-login">
+            <h1>Редактировать</h1>
+           <form method="post" enctype="multipart/form-data">
+             <label class="input-file">
+	   	<input type="file" name="file[]" accept=".png, .jpg, .bmp, .jpeg">
+ 	   	<span class="input-file-btn">Выберите изображение пиццы</span>
+ 	</label><br><br>
+             <div class="div_input"><input type="text" placeholder="Название" class="input" id="name" name="name" title="Название" value="{{ pizza.name }}"></div><br><br>
+            <div class="div_input"><input type="number" placeholder="Цена (в рублях)" step="0.01" min="0" class="input" name="price" id="price" title="Цена" value="{{ pizza.price }}"></div><br><br>
+               <div class="div_input"><textarea  placeholder="Ингредиенты" class="input" style="height: 100px;" id="ingrs" name="ingrs" title="Ингридиенты">{{ pizza.ingredients }}</textarea></div><br><br>
+            <button type="submit" class="btn-login" title="изменить">ИЗМЕНИТЬ</button><br><br>
+           </form>
+        </div>
+    </div>
+</body>
+</html>

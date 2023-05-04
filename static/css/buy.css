@@ -1,0 +1,92 @@
+@media screen {
+    #outer{
+        width: screen width - 40;
+    }
+    #inner{
+        margin: 5% auto;
+        width: 500px;
+    }
+}
+
+.container{
+    background-image: url(/static/images/card.jpg);
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 100px silver;
+    border-radius: 40px;
+    transition: all .8s;
+}
+.container:hover{
+transform: scale(1.1);
+    box-shadow: 0px 0px 100px gold;
+}
+
+.card_number{
+    color: #fff;
+    position: relative;
+    padding-top: 30px;
+    padding-left: 50px;
+    font-weight: bold;
+    font-size: 30px;
+    }
+
+.p{
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    padding-top: 100px;
+    margin-right: 60px;
+    font-weight: bold;
+    font-size: 25px;
+}
+.input-card-number{
+text-align: center;
+    width: 80%;
+    border: none;
+    outline: none;
+    height: 50px;
+    background: rgba(255, 255, 255, .8);
+    border-radius: 100px;
+    transition: background 1s;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+}
+.input-card-number:hover{
+    background: rgba(255, 255, 255, .3);
+}
+::placeholder{
+    color: black;
+    font-weight: bold;
+}
+.button-buy{
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 50px;
+    background: rgba(255, 255, 255, .8);
+    border-radius: 100px;
+    transition: background 1s;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+}
+.button-buy:hover{
+    background: rgba(255, 255, 255, .3);
+}
+.input-card-select{
+    width: 49.6%;
+    border: none;
+    outline: none;
+    height: 50px;
+    background: rgba(255, 255, 255, .8);
+    padding-left: 50px;
+    border-radius: 100px;
+    transition: background 1s;
+    display: inline-block;
+    font-weight: bold;
+}
+.input-card-select:hover{
+    background: rgba(255, 255, 255, .3);
+}

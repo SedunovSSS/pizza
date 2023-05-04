@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Просмотр</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <div id="outer">
+        <div class="pizzas">
+          <div style="width: 50%; float:left; margin-left: 3%">
+          <img src="/{{pizza.path}}" class="img-view-all">
+            </div>
+          <div style="width: 40%; float:right;  margin-top: 100px">
+              <a href="/{{ red_from }}"><img class="icon" src="/static/images/back.png"></a>
+            <h1>Название: {{ pizza.name }}</h1>
+            <h1>Цена: {{ pizza.price }} ₽</h1>
+            <h1>Ингредиенты: {{ pizza.ingredients }}</h1>
+            <button class="btn_" onclick="red_('/buy?id={{ pizza.id }}')">💲 Оформить заказ</button>{% if not in_cart %}<button class="btn_" onclick="add2cart({{pizza.id}})">&#9989; Добавить в корзину</button>{% else %}<button class="btn_" onclick="del_from_cart({{ pizza.id }})">❌ Удалить из Корзины</button>{% endif %}
+            </div>
+        </div>
+</div>
+</body>
+</html>

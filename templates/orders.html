@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/pizza.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Обработка заказов</title>
+</head>
+<body>
+{% include 'header.html' %}
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <div id="outer">
+        <div style="text-align: center;
+        width: 600px; margin: 5% auto;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;">
+         <h1>Заказы</h1>
+          {% if orders == [] %}
+         <h1 id="orders">( Их нет )</h1>
+          {% else %}
+          {% for i in range(orders|length) %}
+          <div style="border: 4px solid white; border-radius: 20px;">
+              <h1>{{ orders[i].author }}</h1>
+              <img src="/{{ pizzas[i].path }}" class="order_img" >
+              <a style="text-decoration: none; color: white;" href="/view?id={{ pizzas[i].id }}&red_from=admin/orders"><h1>{{ pizzas[i].name }}</h1></a>
+              <h1>{{ orders[i].address }}</h1>
+              <div class="spinner"><span style="font-size: 30px;">{{ orders[i].status }} </span></div><br>
+             {% if orders[i].status == 'В обработке' %} <button class="btn_" onclick="red('/admin/orders/set_status?id={{ orders[i].id }}&status=Отправлен')">&#9989; Заказ отправлен</button>{% elif orders[i].status == 'Отправлен' %} <button class="btn_" onclick="red('/admin/orders/set_status?id={{ orders[i].id }}&status=Доставлен')">&#9989; Заказ доставлен</button>{% endif %}<button class="btn_" onclick="red('/admin/delete_order?id={{ orders[i].id }}')">❌ Удалить из-за невалидности</button>
+              <br><br>
+
+          </div><br>
+          {% endfor %}
+          {% endif %}
+      </div>
+</div>
+</body>
+</html>
