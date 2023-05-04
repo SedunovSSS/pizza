@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 db = SQLAlchemy(app)
 HOST = '0.0.0.0'
 PORT = 1000
-DEBUG = True
+DEBUG = False
 
 
 class Users(db.Model):
