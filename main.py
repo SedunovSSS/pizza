@@ -7,7 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 db = SQLAlchemy(app)
 HOST = '0.0.0.0'
 PORT = 1000
-DEBUG = False
+DEBUG = True
 
 
 class Users(db.Model):
@@ -246,6 +246,8 @@ def view():
 @app.route('/profile')
 def profile():
     name = request.cookies.get('user')
+    if name is None:
+        return redirect('/login')
     cart_volume = len(list(Cart.query.filter_by(author=name).all()))
     user = Users.query.filter_by(login=name).first()
     orders = list(Orders.query.filter_by(author=name).all())
@@ -273,7 +275,7 @@ def profile():
 def admin():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     search = request.args.get('search')
     if name is None:
@@ -304,7 +306,7 @@ def admin():
 def admin_del_pizza():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     try:
         _id = int(request.args.get('id'))
@@ -325,7 +327,7 @@ def admin_del_pizza():
 def admin_edit_pizza():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     _id = int(request.args.get('id'))
     pizza = Pizzas.query.filter_by(id=_id).first()
@@ -383,7 +385,7 @@ def admin_edit_pizza():
 def admin_all_users():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     name = request.cookies.get('user')
     users = list(Users.query.all())
@@ -395,9 +397,8 @@ def admin_all_users():
 def admin_del_account():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
-
     try:
         _id = int(request.args.get('id'))
         user = Users.query.filter_by(id=_id).first()
@@ -419,7 +420,7 @@ def gimme_admin():
         print(_ex)
         return redirect('/admin/all_users')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     try:
         user = Users.query.filter_by(id=_id).first()
@@ -438,7 +439,7 @@ def steal_admin():
     except:
         return redirect('/admin/all_users')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     try:
         user = Users.query.filter_by(id=_id).first()
@@ -520,7 +521,7 @@ def admin_orders():
         name = request.cookies.get('user')
         cart_volume = len(list(Cart.query.filter_by(author=name).all()))
         user = Users.query.filter_by(login=name).first()
-        if not user.is_super_user:
+        if not user.is_super_user or name is None:
             return redirect('/login')
         orders = list(Orders.query.filter_by(author=name).all())
         pizzas = []
@@ -544,7 +545,7 @@ def admin_orders():
 def admin_delete_order():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     try:
         _id = int(request.args.get('id'))
@@ -560,7 +561,7 @@ def admin_delete_order():
 def admin_order_set_status():
     name = request.cookies.get('user')
     user = Users.query.filter_by(login=name).first()
-    if not user.is_super_user:
+    if not user.is_super_user or name is None:
         return redirect('/login')
     try:
         _id = int(request.args.get('id'))
